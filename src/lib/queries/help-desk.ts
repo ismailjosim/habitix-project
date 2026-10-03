@@ -1,52 +1,10 @@
 import { prisma } from '@/lib/prisma';
 import { requireModuleAccess } from '@/lib/authorization';
 import type { HelpPostStatus, Prisma } from '@/generated/prisma/client';
+import type { HelpDeskPost, HelpDeskData } from '@/types';
+export type { HelpDeskPost, HelpDeskData };
 
 export const MAX_PEER_HELPERS = 4;
-
-export type HelpDeskPost = {
-  id: string;
-  title: string;
-  body: string;
-  status: string;
-  topic: string | null;
-  urgency: string;
-  imageUrl: string | null;
-  createdAt: Date;
-  resolvedAt: Date | null;
-  author: { id: string; displayName: string; avatarUrl: string | null };
-  tags: string[];
-  helperCount: number;
-  responses: {
-    id: string;
-    body: string;
-    isAccepted: boolean;
-    pointsAwarded: number;
-    createdAt: Date;
-    author: { id: string; displayName: string; avatarUrl: string | null; role: string };
-  }[];
-};
-
-export type HelpDeskData = {
-  posts: HelpDeskPost[];
-  currentProfileId: string | null;
-  currentRole: string | null;
-  teamName: string | null;
-  stats: {
-    open: number;
-    resolved: number;
-    helpers: number;
-    awardedPoints: number;
-    averageFirstResponseMinutes: number | null;
-    averageResolutionMinutes: number | null;
-  };
-  total: number;
-  page: number;
-  pageSize: number;
-  topics: string[];
-  canCreatePost: boolean;
-  canParticipate: boolean;
-};
 
 export async function getHelpDeskData({
   q = '',

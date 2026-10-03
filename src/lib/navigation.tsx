@@ -1,4 +1,3 @@
-import type { Icon } from '@tabler/icons-react';
 import {
   IconBell,
   IconBriefcase,
@@ -13,14 +12,9 @@ import {
   IconUserSquareRounded,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import type { AppModule } from '@/lib/permissions';
 
-export type NavItem = {
-  title: string;
-  href: string;
-  icon: Icon;
-  module: AppModule;
-};
+import type { NavItem } from '@/types';
+export type { NavItem };
 
 export const navigationItems: NavItem[] = [
   {

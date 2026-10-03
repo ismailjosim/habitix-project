@@ -16,17 +16,16 @@ export default async function ProtectedAppLayout({ children }: { children: React
     getActiveFocusSession(currentUser.profile.id),
   ]);
 
+  const userInfo = {
+    name: currentUser.profile.displayName,
+    email: currentUser.session.user.email,
+    image: currentUser.session.user.image,
+    role: currentUser.profile.role,
+    unreadNotificationCount,
+  };
+
   return (
-    <AppShell
-      user={{
-        name: currentUser.profile.displayName,
-        email: currentUser.session.user.email,
-        image: currentUser.session.user.image,
-        role: currentUser.profile.role,
-        unreadNotificationCount,
-      }}
-      activeFocusSession={activeFocusSession}
-    >
+    <AppShell user={userInfo} activeFocusSession={activeFocusSession}>
       {children}
     </AppShell>
   );

@@ -1,23 +1,19 @@
+import type {
+  AnalyticsRange,
+  FocusAnalyticsRow,
+  HelpResponseAnalyticsRow,
+  HelpPostAnalyticsRow,
+  LeaderboardAggregation,
+} from '@/types';
+
 export const HELP_CREDIT_MINUTES_PER_POINT = 10;
 
-export type AnalyticsRange = { start: Date; end: Date };
-export type FocusAnalyticsRow = {
-  actualMinutes: number | null;
-  plannedMinutes: number;
-  completedAt: Date | null;
-  activityType?: string;
-};
-export type HelpResponseAnalyticsRow = {
-  pointsAwarded: number;
-  isAccepted: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
-export type HelpPostAnalyticsRow = {
-  status: string;
-  createdAt: Date;
-  resolvedAt: Date | null;
-  responses: { createdAt: Date }[];
+export type {
+  AnalyticsRange,
+  FocusAnalyticsRow,
+  HelpResponseAnalyticsRow,
+  HelpPostAnalyticsRow,
+  LeaderboardAggregation,
 };
 
 export function rollingRange(days: number, now = new Date()): AnalyticsRange {
@@ -146,15 +142,6 @@ export function startOfWeek(date: Date): Date {
 export function startOfMonth(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
-
-export type LeaderboardAggregation = {
-  profileId: string;
-  displayName: string;
-  avatarUrl: string | null;
-  focusMinutes: number;
-  helpPoints: number;
-  resolutions: number;
-};
 
 export function aggregateLeaderboardMetrics(
   profiles: Array<{

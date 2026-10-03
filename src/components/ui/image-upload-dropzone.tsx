@@ -5,19 +5,8 @@ import { IconAlertCircle, IconPhoto, IconTrash, IconUpload } from '@tabler/icons
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
-export interface ImageUploadDropzoneProps {
-  name?: string;
-  value?: string | null;
-  onChange?: (file: File | null, previewUrl: string | null) => void;
-  aspectRatio?: 'square' | 'video' | 'auto';
-  maxSizeMB?: number;
-  accept?: string;
-  label?: string;
-  description?: string;
-  disabled?: boolean;
-  className?: string;
-  previewHeight?: string;
-}
+import type { ImageUploadDropzoneProps } from '@/types';
+export type { ImageUploadDropzoneProps };
 
 export function ImageUploadDropzone({
   name,

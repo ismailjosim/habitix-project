@@ -14,10 +14,8 @@ cloudinary.config({
   secure: true,
 });
 
-export type UploadedImage = {
-  url: string;
-  publicId: string;
-};
+import type { UploadedImage } from '@/types';
+export type { UploadedImage };
 
 export async function uploadImage(
   file: File,

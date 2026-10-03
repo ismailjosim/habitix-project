@@ -9,49 +9,8 @@ import {
 } from '@/lib/analytics';
 const DEFAULT_DAYS = 365;
 
-type DailyActivity = {
-  date: string;
-  focusMinutes: number;
-  helpCreditMinutes: number;
-  totalMinutes: number;
-};
-
-export type ActivityData = {
-  rangeDays: number;
-  stats: {
-    totalSessions: number;
-    totalFocusMinutes: number;
-    tasksCompleted: number;
-    helpPoints: number;
-    helpCreditMinutes: number;
-    currentStreak: number;
-    bestDay: DailyActivity | null;
-  };
-  heatmap: DailyActivity[];
-  recentSessions: {
-    id: string;
-    activityLabel: string;
-    actualMinutes: number;
-    completedAt: Date;
-    task: { id: string; title: string } | null;
-  }[];
-  breakdown: {
-    activityType: string;
-    label: string;
-    minutes: number;
-    percentage: number;
-  }[];
-};
-
-type SessionRow = {
-  id: string;
-  activityType: string;
-  actualMinutes: number | null;
-  plannedMinutes: number;
-  completedAt: Date | null;
-  notes: string | null;
-  task: { id: string; title: string } | null;
-};
+import type { ActivityData, DailyActivity, SessionRow } from '@/types';
+export type { ActivityData, DailyActivity, SessionRow };
 
 export async function getActivityData(rangeDays = DEFAULT_DAYS): Promise<ActivityData> {
   const current = await requireModuleAccess('activity');
@@ -172,6 +131,6 @@ function getActivityLabel(session: Pick<SessionRow, 'activityType' | 'notes'>) {
 
   return session.activityType
     .split('_')
-    .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
+    .map((word: string) => word.charAt(0) + word.slice(1).toLowerCase())
     .join(' ');
 }

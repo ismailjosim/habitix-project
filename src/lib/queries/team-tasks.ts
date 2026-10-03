@@ -2,23 +2,8 @@ import { prisma } from '@/lib/prisma';
 import { requireModuleAccess } from '@/lib/authorization';
 import { notFound } from 'next/navigation';
 
-export interface TeamTask {
-  id: string;
-  title: string;
-  description: string | null;
-  status: string;
-  priority: string;
-  type: string;
-  dueAt: Date | null;
-  createdBy: {
-    displayName: string;
-    id: string;
-  };
-  assignedTo: {
-    displayName: string;
-    id: string;
-  } | null;
-}
+import type { TeamTask } from '@/types';
+export type { TeamTask };
 
 export async function getTeamTasks(teamId: string): Promise<TeamTask[]> {
   const { profile } = await requireModuleAccess('team');

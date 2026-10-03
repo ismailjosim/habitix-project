@@ -2,35 +2,8 @@ import { prisma } from '@/lib/prisma';
 import { getCurrentSession } from '@/lib/session';
 import { notFound } from 'next/navigation';
 
-export interface ProfileData {
-  id: string;
-  displayName: string;
-  avatarUrl: string | null;
-  email: string;
-  role: string;
-  bio: string | null;
-  timezone: string;
-  institution: string | null;
-  department: string | null;
-  totalFocusMinutes: number;
-  helpPoints: number;
-  currentStreak: number;
-  createdAt: Date;
-  team: {
-    id: string;
-    name: string;
-    role: string;
-  } | null;
-  badges: Array<{
-    id: string;
-    badgeId: string;
-    badgeName: string;
-    badgeIcon: string;
-    badgeDescription: string | null;
-    periodKey: string;
-    awardedAt: Date;
-  }>;
-}
+import type { ProfileData } from '@/types';
+export type { ProfileData };
 
 export async function getProfileData(): Promise<ProfileData> {
   const session = await getCurrentSession();

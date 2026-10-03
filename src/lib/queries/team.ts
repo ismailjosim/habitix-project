@@ -1,38 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { requireModuleAccess } from '@/lib/authorization';
 
-export interface TeamMember {
-  id: string;
-  displayName: string;
-  avatarUrl: string | null;
-  email: string;
-  role: string;
-  joinedAt: Date;
-  profileRole: string;
-  helpPoints: number;
-}
-
-export interface TeamData {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  avatarUrl: string | null;
-  owner: {
-    id: string;
-    displayName: string;
-    email: string;
-  };
-  members: TeamMember[];
-  roles: {
-    leaders: TeamMember[];
-    mentors: TeamMember[];
-    members: TeamMember[];
-  };
-  memberCount: number;
-  currentUserRole: string;
-  currentUserProfileId: string;
-}
+import type { TeamMember, TeamData } from '@/types';
+export type { TeamMember, TeamData };
 
 export async function getTeamData(): Promise<TeamData | null> {
   const { profile } = await requireModuleAccess('team');

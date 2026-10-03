@@ -11,42 +11,9 @@ import {
 
 type Period = 'weekly' | 'monthly';
 
-export type LeaderboardRow = {
-  profileId: string;
-  displayName: string;
-  avatarUrl: string | null;
-  rank: number;
-  focusMinutes: number;
-  helpPoints: number;
-  resolutions: number;
-  isCurrentUser: boolean;
-};
+import type { LeaderboardRow, LeaderboardPeriodData, LeaderboardData } from '@/types';
 
-export type LeaderboardPeriodData = {
-  label: string;
-  performers: LeaderboardRow[];
-  contributors: LeaderboardRow[];
-  currentUserPerformerRank: number | null;
-  currentUserContributorRank: number | null;
-};
-
-export type LeaderboardData = {
-  teamName: string | null;
-  currentProfileId: string | null;
-  weekly: LeaderboardPeriodData;
-  monthly: LeaderboardPeriodData;
-  badges: {
-    id: string;
-    profileId: string;
-    displayName: string;
-    badgeName: string;
-    badgeDescription: string | null;
-    iconName: string;
-    periodKey: string;
-    awardedAt: Date;
-    isCurrentUser: boolean;
-  }[];
-};
+export type { LeaderboardRow, LeaderboardPeriodData, LeaderboardData };
 
 export async function getLeaderboardData(): Promise<LeaderboardData> {
   const current = await requireModuleAccess('leaderboard');

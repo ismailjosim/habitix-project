@@ -1,9 +1,5 @@
-export interface UploadResponse {
-  success: boolean;
-  url: string;
-  publicId: string;
-  error?: string;
-}
+import type { UploadResponse } from '@/types';
+export type { UploadResponse };
 
 /**
  * Client-side file upload utility calling /api/upload

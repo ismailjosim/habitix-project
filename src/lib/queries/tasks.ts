@@ -3,68 +3,15 @@ import { requireModuleAccess } from '@/lib/authorization';
 import { canAssignTask } from '@/lib/permissions';
 import { canManageTask } from '@/lib/permissions';
 import type { Prisma, TaskStatus } from '@/generated/prisma/client';
+import type {
+  TaskFilters,
+  BoardTask,
+  TaskBoardData,
+  AssignableStudent,
+  AssignableTeam,
+} from '@/types';
 
-export type TaskFilters = {
-  q?: string;
-  status?: string;
-  category?: string;
-  page?: number;
-};
-
-export type BoardTask = {
-  id: string;
-  title: string;
-  description: string | null;
-  status: string;
-  priority: string;
-  type: string;
-  category: string | null;
-  dueAt: Date | null;
-  createdAt: Date;
-  canManage: boolean;
-  assignedTo: {
-    id: string;
-    displayName: string;
-    avatarUrl: string | null;
-  } | null;
-  createdBy: {
-    id: string;
-    displayName: string;
-    avatarUrl: string | null;
-  };
-  subtasks: {
-    id: string;
-    title: string;
-    isDone: boolean;
-  }[];
-};
-
-export type TaskBoardData = {
-  personalTasks: BoardTask[];
-  assignedTasks: BoardTask[];
-  assignableStudents: AssignableStudent[];
-  assignableTeams: AssignableTeam[];
-  currentRole: string | null;
-  currentProfileId: string | null;
-  canAssignTasks: boolean;
-  total: number;
-  page: number;
-  pageSize: number;
-  categories: string[];
-};
-
-export type AssignableStudent = {
-  id: string;
-  displayName: string;
-  role: string;
-  teamName: string | null;
-};
-
-export type AssignableTeam = {
-  id: string;
-  name: string;
-  memberCount: number;
-};
+export type { TaskFilters, BoardTask, TaskBoardData, AssignableStudent, AssignableTeam };
 
 export async function getTaskBoardData(filters: TaskFilters = {}): Promise<TaskBoardData> {
   const current = await requireModuleAccess('tasks');

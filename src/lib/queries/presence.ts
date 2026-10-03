@@ -1,19 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { PRESENCE_STALE_AFTER_MS } from '@/lib/presence';
-
-export type TeamPresence = {
-  profileId: string;
-  displayName: string;
-  avatarUrl: string | null;
-  role: string;
-  isOnline: boolean;
-  lastSeenAt: Date | null;
-  focus: {
-    status: string;
-    activityLabel: string;
-    taskTitle: string | null;
-  } | null;
-};
+import type { TeamPresence } from '@/types';
+export type { TeamPresence };
 
 export async function getTeamPresence({
   teamId,

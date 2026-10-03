@@ -2,27 +2,9 @@ import { prisma } from '@/lib/prisma';
 import { getCurrentUserProfile } from '@/lib/session';
 import type { NotificationType, Prisma } from '@/generated/prisma/client';
 
-export type NotificationCategory = 'all' | 'tasks' | 'help' | 'responses' | 'mentorship' | 'awards';
+import type { NotificationCategory, NotificationItem, NotificationsData } from '@/types';
 
-export type NotificationItem = {
-  id: string;
-  type: string;
-  title: string;
-  body: string | null;
-  targetType: string | null;
-  targetId: string | null;
-  readAt: Date | null;
-  createdAt: Date;
-  actor: { displayName: string; avatarUrl: string | null } | null;
-};
-
-export type NotificationsData = {
-  notifications: NotificationItem[];
-  unreadCount: number;
-  total: number;
-  page: number;
-  pageSize: number;
-};
+export type { NotificationCategory, NotificationItem, NotificationsData };
 
 const categoryTypes: Record<Exclude<NotificationCategory, 'all'>, NotificationType[]> = {
   tasks: ['TASK_ASSIGNED', 'TASK_DUE'],

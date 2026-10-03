@@ -1,37 +1,13 @@
 import { prisma } from '@/lib/prisma';
 import { requireModuleAccess } from '@/lib/authorization';
+import type {
+  FocusTaskOption,
+  FocusSessionSummary,
+  ActiveFocusSession,
+  FocusModeData,
+} from '@/types';
 
-export type FocusTaskOption = {
-  id: string;
-  title: string;
-  type: string;
-  status: string;
-};
-
-export type FocusSessionSummary = {
-  id: string;
-  activityType: string;
-  activityLabel: string;
-  status: string;
-  plannedMinutes: number;
-  actualMinutes: number | null;
-  elapsedSeconds: number;
-  startedAt: Date | null;
-  completedAt: Date | null;
-  taskTitle: string | null;
-};
-
-export type ActiveFocusSession = FocusSessionSummary & {
-  taskId: string | null;
-  remainingSeconds: number;
-};
-
-export type FocusModeData = {
-  tasks: FocusTaskOption[];
-  todaySessions: FocusSessionSummary[];
-  activeSession: ActiveFocusSession | null;
-  todayFocusMinutes: number;
-};
+export type { FocusTaskOption, FocusSessionSummary, ActiveFocusSession, FocusModeData };
 
 export async function getActiveFocusSession(profileId: string): Promise<ActiveFocusSession | null> {
   const session = await prisma.focusSession.findFirst({
